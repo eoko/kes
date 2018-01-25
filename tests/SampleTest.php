@@ -2,7 +2,6 @@
 
 namespace Eoko\Tests\Kes;
 
-use DateTime;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Eoko\Kes\BaseEntityInterface;
 use Eoko\Kes\EntityCacheManager;

@@ -1,13 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: merlin
- * Date: 25/01/18
- * Time: 18:43
- */
+
 
 namespace Eoko\Kes;
-
 
 trait IdentifiableTrait
 {
