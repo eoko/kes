@@ -11,7 +11,7 @@
         syntaxCheck="false">
 
     <testsuite name="PHP_Job_Unit_Test">
-        <directory suffix="Test.php">tests/Roadzila/*</directory>
+        <directory suffix="Test.php">tests/*</directory>
     </testsuite>
 
     <logging>
