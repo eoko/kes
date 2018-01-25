@@ -7,12 +7,12 @@ use DateTime;
 interface MetadataEntityInterface
 {
     /**
-     * @param DateTime $date
+     * @param DateTime $created
      */
-    public function setCreated(DateTime $date): void;
+    public function setCreated(DateTime $created): void;
 
     /**
-     * @param DateTime $date
+     * @param DateTime $updated
      */
-    public function setUpdated(DateTime $date): void;
+    public function setUpdated(DateTime $updated): void;
 }

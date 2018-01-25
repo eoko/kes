@@ -1,6 +1,6 @@
 <?php
 
-namespace Eoko\Kes\Plugins\MetadataPlugin;
+namespace Eoko\Kes\Plugins\SkuPlugin;
 
 use Eoko\Kes\Plugins\AbstractPlugin;
 use Ramsey\Uuid\Uuid;
