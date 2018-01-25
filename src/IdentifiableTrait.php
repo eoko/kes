@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Eoko\Kes;
 
 trait IdentifiableTrait
