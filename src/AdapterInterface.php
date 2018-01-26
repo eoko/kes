@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Eoko\Kes;
 
 use InvalidArgumentException;

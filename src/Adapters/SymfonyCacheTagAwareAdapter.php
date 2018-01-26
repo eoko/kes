@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Eoko\Kes\Adapters;
 
 use Eoko\Kes\AdapterInterface;
