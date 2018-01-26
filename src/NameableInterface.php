@@ -7,5 +7,5 @@ interface NameableInterface
     /**
      * @return string
      */
-    public function internalName(): string;
+    public function name(): string;
 }

@@ -3,9 +3,11 @@
 namespace Eoko\Tests\Kes;
 
 use Doctrine\Common\Annotations\AnnotationRegistry;
+use Eoko\Kes\Adapters\SymfonyCacheTagAwareAdapter;
 use Eoko\Kes\BaseEntityInterface;
 use Eoko\Kes\EntityCacheManager;
-use Eoko\Kes\IdentifiableTrait;
+use Eoko\Kes\BaseEntityTrait;
+use Eoko\Kes\NameableInterface;
 use Eoko\Kes\Plugins\DisabledPlugin\DisabledPlugin;
 use Eoko\Kes\Plugins\DisabledPlugin\DisableEntityInterface;
 use Eoko\Kes\Plugins\DisabledPlugin\DisableEntityTrait;
@@ -13,14 +15,11 @@ use Eoko\Kes\Plugins\MetadataPlugin\MetadataEntityInterface;
 use Eoko\Kes\Plugins\MetadataPlugin\MetadataEntityTrait;
 use Eoko\Kes\Plugins\MetadataPlugin\MetadataPlugin;
 use Eoko\Kes\Plugins\SkuPlugin\SkuEntityTrait;
-use Eoko\Kes\Plugins\UniqueIdPlugin\UniqueEntityInterface;
 use Eoko\Kes\Plugins\UniqueIdPlugin\UniqueIdPlugin;
 use JMS\Serializer\Annotation as Serializer;
-use JMS\Serializer\SerializerBuilder;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Cache\Adapter\ArrayAdapter;
+use Symfony\Component\Cache\Adapter\RedisAdapter;
 use Symfony\Component\Cache\Adapter\TagAwareAdapter;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class SampleTest extends TestCase
 {
@@ -28,18 +27,16 @@ class SampleTest extends TestCase
     {
         AnnotationRegistry::registerLoader('class_exists');
 
-        $d = new EventDispatcher();
-        $s = SerializerBuilder::create()->build();
-        $a = new TagAwareAdapter(new ArrayAdapter());
-        $manager = new EntityCacheManager($d, $a, $s);
+        $adapter = new SymfonyCacheTagAwareAdapter(new TagAwareAdapter(new RedisAdapter(RedisAdapter::createConnection('redis://localhost'))));
+        $manager = new EntityCacheManager($adapter);
 
         $manager->registerPlugin(new MetadataPlugin());
         $manager->registerPlugin(new UniqueIdPlugin());
         $manager->registerPlugin(new DisabledPlugin());
 
-        $manager->registerEntity(new SampleEntity());
-
         $entity = new SampleEntity();
+        $entity->setId(1);
+        $entity->setCustom('hello');
 
         $manager->createOneEntity($entity);
 
@@ -61,9 +58,9 @@ class SampleTest extends TestCase
     }
 }
 
-class SampleEntity implements BaseEntityInterface, MetadataEntityInterface, UniqueEntityInterface, DisableEntityInterface
+class SampleEntity implements BaseEntityInterface, MetadataEntityInterface, DisableEntityInterface, NameableInterface
 {
-    use IdentifiableTrait, SkuEntityTrait, MetadataEntityTrait, DisableEntityTrait;
+    use BaseEntityTrait, SkuEntityTrait, MetadataEntityTrait, DisableEntityTrait;
 
     /**
      * @var string
@@ -87,10 +84,7 @@ class SampleEntity implements BaseEntityInterface, MetadataEntityInterface, Uniq
         $this->custom = $custom;
     }
 
-    /**
-     * @return string
-     */
-    public function internalName(): string
+    public function name(): string
     {
         return 'sample';
     }

@@ -2,6 +2,6 @@
 
 namespace Eoko\Kes;
 
-interface BaseEntityInterface extends NameableInterface, IdentifiableInterface
+interface BaseEntityInterface extends IdentifiableInterface
 {
 }

@@ -2,7 +2,7 @@
 
 namespace Eoko\Kes;
 
-trait IdentifiableTrait
+trait BaseEntityTrait
 {
     /**
      * @var string

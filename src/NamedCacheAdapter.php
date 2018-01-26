@@ -4,8 +4,6 @@ namespace Eoko\Kes;
 
 use Psr\Cache\CacheItemInterface;
 use Eoko\Kes\Exceptions\ItemNotFound;
-use Symfony\Component\Cache\Adapter\TagAwareAdapter;
-use Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
 
 /**
  * Class NamedCache.
@@ -18,16 +16,16 @@ class NamedCacheAdapter
     /** @var string */
     protected $name;
 
-    /** @var TagAwareAdapter */
+    /** @var AdapterInterface */
     protected $adapter;
 
     /**
      * NamedCache constructor.
      *
-     * @param string                   $name
-     * @param TagAwareAdapterInterface $adapter
+     * @param string           $name
+     * @param AdapterInterface $adapter
      */
-    public function __construct(string $name = '', TagAwareAdapterInterface $adapter)
+    public function __construct(string $name = '', AdapterInterface $adapter)
     {
         $this->name = $name;
         $this->prefix = $name.'_';
