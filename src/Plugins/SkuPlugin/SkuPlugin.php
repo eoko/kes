@@ -23,7 +23,9 @@ class SkuPlugin extends AbstractPlugin
         $entity = $event->getEntity();
 
         if ($entity instanceof SkuEntityInterface) {
-            $entity->setSku(Uuid::uuid4()->toString());
+            if (!$entity->getSku()) {
+                $entity->setSku(Uuid::uuid4()->toString());
+            }
         }
     }
 }
