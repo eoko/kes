@@ -23,9 +23,13 @@ class SkuPlugin extends AbstractPlugin
         $entity = $event->getEntity();
 
         if ($entity instanceof SkuEntityInterface) {
+<<<<<<< HEAD
             if (!$entity->getSku()) {
                 $entity->setSku(Uuid::uuid4()->toString());
             }
+=======
+            $entity->setSku(Uuid::uuid4()->toString());
+>>>>>>> merlin-dev
         }
     }
 }
