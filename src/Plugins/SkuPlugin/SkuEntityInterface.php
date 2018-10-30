@@ -8,12 +8,9 @@ interface SkuEntityInterface
      * @param string $sku
      */
     public function setSku(string $sku): void;
-<<<<<<< HEAD
 
     /**
      * @return string
      */
     public function getSku(): ?string;
-=======
->>>>>>> merlin-dev
 }
